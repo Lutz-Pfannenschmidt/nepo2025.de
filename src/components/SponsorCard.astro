@@ -5,10 +5,9 @@ interface Props {
     url: string;
     alt?: string;
     btnText: string;
-    amount: number;
 }
 
-const { title, img, url, alt = "", amount, btnText = "Website" } = Astro.props;
+const { title, img, url, alt = "", btnText = "Website" } = Astro.props;
 ---
 
 <div class="card lg:card-side bg-base-100 shadow-xl my-4">
