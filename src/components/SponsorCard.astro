@@ -1,27 +1,25 @@
 ---
 interface Props {
     title: string;
-    img : string;
-    url : string;
-    alt? : string;
-    btnText : string;
-    amount : number;
+    img: string;
+    url: string;
+    alt?: string;
+    btnText: string;
+    amount: number;
 }
 
 const { title, img, url, alt = "", amount, btnText = "Website" } = Astro.props;
 ---
 
 <div class="card lg:card-side bg-base-100 shadow-xl my-4">
-  <figure>
-    <img
-      src={img}
-      alt={alt} />
-  </figure>
-  <div class="card-body">
-    <h2 class="card-title">{title}</h2>
-    <p><slot></slot></p>
-    <div class="card-actions justify-end">
-      <a href={url} class="btn btn-primary">{btnText}</a>
+    <figure>
+        <img src={img} alt={alt} />
+    </figure>
+    <div class="card-body">
+        <h2 class="card-title">{title}</h2>
+        <p><slot /></p>
+        <div class="card-actions justify-end">
+            <a href={url} class="btn btn-primary">{btnText}</a>
+        </div>
     </div>
-  </div>
 </div>
