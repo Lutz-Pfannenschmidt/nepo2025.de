@@ -1,0 +1,15 @@
+---
+const sponsors = [
+    ["Noch keine Sponsoren 😨 - Ihr Name Könnte hier stehen!", "#"],
+];
+
+const html = sponsors
+    .map(([name, url]) => `<a href="${url}">${name}</a>`)
+    .join(" | ");
+---
+
+<footer class="footer footer-center bg-base-200 text-base-content p-4">
+    <aside>
+        <p set:html={html} />
+    </aside>
+</footer>

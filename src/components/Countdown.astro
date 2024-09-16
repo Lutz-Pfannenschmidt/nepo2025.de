@@ -1,0 +1,115 @@
+<div class="hero min-h-full flex-grow">
+    <div class="hero-content text-center">
+        <div class="max-w-6xl">
+            <h1
+                class="text-2xl md:text-4xl lg:text-4xl font-bold p-6 md:p-8 lg:p-12"
+            >
+                Abi Countdown:
+            </h1>
+            <div
+                class="grid grid-flow-col gap-3 md:gap-4 lg:gap-5 text-center auto-cols-max w-full bg-clip-text text-success"
+            >
+                <div class="flex flex-col">
+                    <span
+                        class="countdown font-mono lg:text-6xl md:text-4xl text-2xl"
+                    >
+                        <span class="counter years"></span>
+                    </span>
+                    <span class="hidden lg:block">Jahre</span>
+                    <span class="block lg:hidden">J</span>
+                </div>
+                <div class="flex flex-col">
+                    <span
+                        class="countdown font-mono lg:text-6xl md:text-4xl text-2xl"
+                    >
+                        <span class="counter months"></span>
+                    </span>
+                    <span class="hidden lg:block">Monate</span>
+                    <span class="block lg:hidden">M</span>
+                </div>
+                <div class="flex flex-col">
+                    <span
+                        class="countdown font-mono lg:text-6xl md:text-4xl text-2xl"
+                    >
+                        <span class="counter days"></span>
+                    </span>
+                    <span class="hidden lg:block">Tage</span>
+                    <span class="block lg:hidden">T</span>
+                </div>
+                <div class="flex flex-col">
+                    <span
+                        class="countdown font-mono lg:text-6xl md:text-4xl text-2xl"
+                    >
+                        <span class="counter hours"></span>
+                    </span>
+                    <span class="hidden lg:block">Stunden</span>
+                    <span class="block lg:hidden">S</span>
+                </div>
+                <div class="flex flex-col">
+                    <span
+                        class="countdown font-mono lg:text-6xl md:text-4xl text-2xl"
+                    >
+                        <span class="counter minutes"></span>
+                    </span>
+                    <span class="hidden lg:block">Minuten</span>
+                    <span class="block lg:hidden">M</span>
+                </div>
+                <div class="flex flex-col">
+                    <span
+                        class="countdown font-mono lg:text-6xl md:text-4xl text-2xl"
+                    >
+                        <span class="counter seconds"></span>
+                    </span>
+                    <span class="hidden lg:block">Sekunden</span>
+                    <span class="block lg:hidden">S</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const hardcodedDate = new Date("2025-07-05T08:00:00");
+
+    function calculateTimeDifference() {
+        const now = new Date();
+        const timeDifference = hardcodedDate.getTime() - now.getTime();
+
+        const years = Math.floor(
+            timeDifference / (365.25 * 24 * 60 * 60 * 1000),
+        );
+        const months = Math.floor(
+            (timeDifference % (365.25 * 24 * 60 * 60 * 1000)) /
+                (30.44 * 24 * 60 * 60 * 1000),
+        );
+        const days = Math.floor(
+            (timeDifference % (30.44 * 24 * 60 * 60 * 1000)) /
+                (24 * 60 * 60 * 1000),
+        );
+        const hours = Math.floor(
+            (timeDifference % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000),
+        );
+        const minutes = Math.floor(
+            (timeDifference % (60 * 60 * 1000)) / (60 * 1000),
+        );
+        const seconds = Math.floor((timeDifference % (60 * 1000)) / 1000);
+
+        const yearsElement = document.querySelector(".counter.years");
+        const monthsElement = document.querySelector(".counter.months");
+        const daysElement = document.querySelector(".counter.days");
+        const hoursElement = document.querySelector(".counter.hours");
+        const minutesElement = document.querySelector(".counter.minutes");
+        const secondsElement = document.querySelector(".counter.seconds");
+
+        yearsElement?.setAttribute("style", `--value:${years};`);
+        monthsElement?.setAttribute("style", `--value:${months};`);
+        daysElement?.setAttribute("style", `--value:${days};`);
+        hoursElement?.setAttribute("style", `--value:${hours};`);
+        minutesElement?.setAttribute("style", `--value:${minutes};`);
+        secondsElement?.setAttribute("style", `--value:${seconds};`);
+    }
+
+    calculateTimeDifference();
+
+    setInterval(calculateTimeDifference, 1000);
+</script>

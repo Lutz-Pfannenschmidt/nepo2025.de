@@ -1,0 +1,55 @@
+<div class="hero bg-base-200 min-h-full flex-grow h-full">
+    <div class="hero-content flex-col lg:flex-row-reverse">
+        <div class="text-center lg:text-left">
+            <h1 class="text-5xl font-bold">Kontaktieren sie mich!</h1>
+            <p class="py-6">
+                Zum sponsoren für unsere Abizeitung oder für Fragen und
+                Anregungen können sie uns gerne kontaktieren.
+            </p>
+        </div>
+        <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+            <form class="card-body">
+                <h1 class="text-2xl">Lutz Pfannenschmidt, Q2</h1>
+                <hr />
+                <h2 class="text-xl">Email:</h2>
+                <code id="email">Loading ...</code>
+                <h2 class="text-xl">Telefon:</h2>
+                <code id="phone">Loading ...</code>
+                <p class="opacity-70 italic">
+                    (Anfragen per Email sind bevorzugt.)
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    var encodedEmail = "YWJpemVpdHVuZ0BuZXBvMjAyNS5kZQ==";
+    var encodedPhone = "KCs0OSkgMTcyIDc2NzM0MTk=";
+
+    async function animateText(text: string, element: HTMLElement) {
+        element.textContent = "";
+        var i = 0;
+        while (i < text.length) {
+            element.textContent += text[i];
+            await new Promise((resolve) => setTimeout(resolve, 50));
+            i++;
+        }
+    }
+
+    function decodeBase64(encoded: string) {
+        return atob(encoded);
+    }
+
+    setTimeout(main, 1000);
+    function main() {
+        animateText(
+            decodeBase64(encodedEmail),
+            document.getElementById("email")!,
+        );
+        animateText(
+            decodeBase64(encodedPhone),
+            document.getElementById("phone")!,
+        );
+    }
+</script>
