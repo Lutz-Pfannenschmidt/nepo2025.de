@@ -1,15 +1,20 @@
 ---
 const sponsors = [
-    ["Noch keine Sponsor*innen 😨 - Ihr Name könnte hier stehen!", "#"],
+    [
+        "Autohaus Tönnemann",
+        "https://www.autohaus-toennemann.de/standorte/coesfeld/",
+    ],
 ];
 
-const html = sponsors
+let html = sponsors
     .map(([name, url]) => `<a href="${url}">${name}</a>`)
     .join(" | ");
+
+html = "Unsere Sponsoren: " + html;
 ---
 
 <footer class="footer footer-center bg-base-300 text-base-content p-4">
     <aside>
-        <p set:html={html} />
+        <p class="text-xl" set:html={html} />
     </aside>
 </footer>
