@@ -1,0 +1,251 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const parties = [
+    "Partei der Schulbremse",
+    "Bündnis für Deutschland",
+    "Partei der Freiheit (nur für uns Reiche)",
+    "Woke-Mind-Virus",
+    "Kirchliche Halbdemoratische Vereinigung",
+    "HALT STOPP! Ales bleibt wie es ist",
+];
+
+const programms = [
+    "Die Partei der Schulbremse setzt sich für möglichst wenig Partizipation im Unterricht, eine Verkürzung der Zeit in diesem ein und will das von den Schulnoten entkoppeln.",
+    "Das Bündnis für Deutschland hat keinen Bock auf all den Gender-Gaga mit den 50-Geschlechtern und will einen gesunden Mittelweg zwischen Vielfalt und Nazis finden.",
+    "Die Partei der Freiheit will mehr Freiheit: Freiheit von Steuern, Freiheit von Sozialstaatlichkeit, Freiheit von Faktenchecks. Dennoch schützt sie das private Eigentum, die Strukturelle Ausgrenzung unbeliebter Bevölkerungsschichten und das Patriarchat.",
+    "Faaaaschooo-Hiiirneee!!!",
+    "Die Kirchliche Halbdemokratische Vereinigung setzt sich für die Wiederherstellung des Gottesstaates ein, in dem die Kirche die Macht hat und die Demokratie nur halb so wichtig ist.",
+    "HALT STOPP! Ales bleibt wie es ist - der Name ist Programm.",
+];
+---
+
+<Layout title="Nep-O-Mat">
+    <div
+        role="alert"
+        class="alert alert-warning w-[95%] md:w-[85%] lg:w-[50%] mx-auto mt-8"
+    >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 shrink-0 stroke-current"
+            fill="none"
+            viewBox="0 0 24 24"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+            ></path>
+        </svg>
+        <span
+            >Disclaimer: Dieser Test ist nicht ernst gemeint und sollte nicht
+            als ernstzunehmende politische Beratung angesehen werden. Die
+            Parteien und Programme sind fiktiv und eventuelle Ähnlichkeiten mit
+            realen Parteien oder Personen sind rein zufällig.
+        </span>
+    </div>
+
+    <div class="hero min-h-full flex-grow h-full">
+        <div
+            class="card bg-base-100 w-96 shadow-xl justify-self-center lg:card-side outline-dashed"
+            id="questions"
+        >
+            <div class="card-body items-center text-center">
+                <p id="counter">Frage 0/0</p>
+                <h2 class="card-title pb-2">Text</h2>
+                <p></p>
+                <div class="card-actions justify-end flex-col w-full">
+                    <button id="yes" class="btn btn-success w-full">Ja</button>
+                    <button id="maybe" class="btn btn-warning w-full"
+                        >Vielleicht</button
+                    >
+                    <button id="no" class="btn btn-error w-full">Nein</button>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="hero-content text-center hidden my-16 pt-8 w-[50%] border-r-8 outline-dashed"
+            id="results"
+        >
+            <div class="w-full">
+                <h1 class="mb-5 text-5xl font-bold">Deine Ergebnisse:</h1>
+                <p class="mb-5">
+                    Rechtlich unbindend sagen wir uns frei von jeglicher
+                    absichtlichen Suggestion in Fragen oder Ergebnissen.
+                </p>
+
+                <div class="join join-vertical w-full" id="parties">
+                    {
+                        parties.map((item, idx) => (
+                            <div
+                                class="collapse collapse-arrow join-item border-base-300 border"
+                                data-party={idx}
+                                data-sort={idx}
+                            >
+                                <input
+                                    type="radio"
+                                    name="my-accordion-4"
+                                    checked="checked"
+                                />
+                                <div class="collapse-title text-xl font-medium">
+                                    <div class="text-left">
+                                        <p class="mt-2 text-lg">{item}</p>
+                                        <progress
+                                            class="progress w-full h-8"
+                                            max="100"
+                                            data-party-progress={idx}
+                                        />
+                                        <p class="text-lg text-neutral-content relative mt-0 ml-2 top-[-2.2rem]">
+                                            <strong data-party-percent={idx}>
+                                                00%
+                                            </strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="collapse-content">
+                                    <p>{programms[idx]}</p>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>
+
+<script>
+    const counter = document.getElementById("counter") as HTMLElement;
+    const questionCard = document.getElementById("questions") as HTMLElement;
+    const resultCard = document.getElementById("results") as HTMLElement;
+
+    const yesButton = document.getElementById("yes") as HTMLButtonElement;
+    const noButton = document.getElementById("no") as HTMLButtonElement;
+    const maybeButton = document.getElementById("maybe") as HTMLButtonElement;
+
+    yesButton.addEventListener("click", () => handleAnswer(0));
+    maybeButton.addEventListener("click", () => handleAnswer(1));
+    noButton.addEventListener("click", () => handleAnswer(2));
+
+    const questions = [
+        "Spielen Sie wen es in SoWi gerade um Friedenspolitik geht lieber Brawl-Stars?",
+        "Kettensäge!",
+        "Es sollte eine Genderpflicht für Schulen geben, in der Zeit die Lehrer:innen dafür benötigen kann man länger Clash of Clans spielen.",
+        "Meine Glaskastenstammposition ist hinten links.",
+        "Integrationsproblem = Migrationsproblem",
+        "Zukunft wär' schon cool.",
+        "Lass mal nur demokratische Parteien wählbar machen.",
+        "Der Französischunterricht sollte auf latein und der Lateinunterricht auf französisch gehalten werden.",
+        "Dieser Nepo-O-Mat ist eine ontologisch schlimme Erfahrung.",
+        "Offizielle Unterichtssprache soll Plattdeutsch sein. (Fremdspachen inklusive)",
+        "Ein Münzwurf soll darüber entscheiden, ob Stochastik in den Mathekursen gelehrt wird.",
+        "Bei Streitigkeiten zu lyrischen Werken sollte die Person, die es verfasst hat, unabhängig von ihrer Verfassung ihre Intention bei Erstellung des Werkes teilen.",
+        "Fehlzeiten seitens der Lehrenden müssen mit einem Cent pro Minute pro Schüler:in an die Schüler:innen vergütet werden.",
+        "Die Schule sollte eine eigene Währung einführen, die nur in der Schule gültig ist.",
+        "Halluzinogene Substanzen sollten in der Schule ausdrücklich erlaubt sein, um die Kreativität anzuregen.",
+        "Die Schule sollte strikt in Ober- und Unterstufe geteilt werden, möglicherweise durch einen Zaun.",
+        "Hausaufgaben sind ein Relikt der Vergangenheit und sollten abgeschafft werden, da sie soziale Ungleichheit fördern.",
+        "Die SChule soll mit biometriischen kameras in den Räumen die Anwesenheit der SChüler:innen überprüfen dürfen.",
+    ];
+
+    const Y = 0; // Yes
+    const M = 1; // Maybe
+    const N = 2; // No
+
+    const manifests = [
+        //Partei der Schulbremse
+        [Y, M, Y, M, M, M, M, N, N, N, Y, Y, N, Y, Y, Y, Y, N],
+        //BfD
+        [Y, M, N, N, Y, N, N, N, Y, Y, M, N, N, Y, N, Y, N, Y],
+        //Partei der Freiheit
+        [Y, Y, M, N, Y, N, M, M, M, N, Y, N, Y, N, Y, N, Y, N],
+        //Woke-Mind-Virus
+        [N, N, Y, Y, N, Y, Y, Y, N, N, Y, N, Y, N, Y, N, Y, N],
+        //Kichliche Halbdemokratische Vereinigung
+        [M, Y, N, N, Y, N, N, N, Y, Y, M, M, N, M, N, M, N, Y],
+        //Halt Stopp
+        [M, N, N, M, Y, M, N, N, Y, N, N, N, N, N, N, N, N, N],
+    ];
+    const parties = manifests.length;
+
+    let curr = 0;
+    let ownResults: number[] = [];
+
+    function showQuestion() {
+        if (curr < questions.length) {
+            const question = questions[curr];
+            const card = document.querySelector(".card") as HTMLElement;
+            const title = card.querySelector(".card-title") as HTMLElement;
+            title.textContent = question;
+            counter.textContent = `Frage ${curr + 1}/${questions.length}`;
+        } else {
+            let similarityScores: { [key: number]: number } = {};
+            for (let p = 0; p < parties; p++) {
+                similarityScores[p] = similarityScore(p);
+            }
+            showResult(similarityScores);
+        }
+    }
+
+    function showResult(groups: { [key: number]: number }) {
+        for (let p = 0; p < parties; p++) {
+            const card = document.querySelector(
+                `[data-party="${p}"]`,
+            ) as HTMLElement;
+            const progress = document.querySelector(
+                `[data-party-progress="${p}"]`,
+            ) as HTMLProgressElement;
+            const percent = document.querySelector(
+                `[data-party-percent="${p}"]`,
+            ) as HTMLElement;
+
+            card.setAttribute("data-sort", groups[p].toString());
+            progress.value = groups[p];
+            percent.textContent = `${groups[p]}%`;
+        }
+
+        sortChildren(document.getElementById("parties")!);
+        questionCard.classList.add("hidden");
+        resultCard.classList.remove("hidden");
+    }
+
+    function sortChildren(element: HTMLElement) {
+        const children = Array.from(element.children);
+        children.sort((a, b) => {
+            const aValue = parseInt(a.getAttribute("data-sort") || "", 10);
+            const bValue = parseInt(b.getAttribute("data-sort") || "", 10);
+            return bValue - aValue;
+        });
+        element.append(...children);
+    }
+
+    function handleAnswer(answer: number) {
+        if (ownResults.length == curr) {
+            ownResults.push(answer);
+            setTimeout(() => {
+                curr++;
+                showQuestion();
+            }, 250);
+        }
+    }
+
+    function similarityScore(p: number) {
+        let max = manifests[p].length;
+        manifests[p].forEach((opinion) => {
+            if (opinion != 1) {
+                max++;
+            }
+        });
+
+        let score = max;
+        for (let i = 0; i < ownResults.length; i++) {
+            score -= Math.abs(ownResults[i] - manifests[p][i]);
+        }
+
+        return Math.round((100 * score) / max);
+    }
+
+    showQuestion();
+</script>
