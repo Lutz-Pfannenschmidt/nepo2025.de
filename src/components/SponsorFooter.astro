@@ -5,13 +5,17 @@ const sponsors = [
         "https://www.autohaus-toennemann.de/standorte/coesfeld/",
     ],
     ["SHOPMACHER eCommerce GmbH & Co. KG", "https://www.shopmacher.de/"],
+    [
+        "Fahrschule Reiling",
+        "https://www.fahrschulen.de/Fahrschule-62392/Billerbeck/Fahrschule%20Reiling",
+    ],
 ];
 
 let html = sponsors
     .map(([name, url]) => `<a href="${url}">${name}</a>`)
     .join(" | ");
 
-html = "Unsere Sponsoren: " + html;
+html = `Unsere Sponsoren: ${html}`;
 ---
 
 <footer class="footer footer-center bg-base-300 text-base-content p-4">
